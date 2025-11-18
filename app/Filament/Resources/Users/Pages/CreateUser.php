@@ -15,14 +15,7 @@ class CreateUser extends CreateRecord
             'name' => '',
             'email' => '',
             'password' => '',
-            'role' => 'user', // default
+            'role' => 'staff',
         ];
-    }
-
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $allowed = ['user', 'staff'];
-        $data['role'] = in_array($data['role'] ?? 'user', $allowed, true) ? $data['role'] : 'user';
-        return $data;
     }
 }

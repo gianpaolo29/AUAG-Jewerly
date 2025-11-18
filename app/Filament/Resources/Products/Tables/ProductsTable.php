@@ -19,34 +19,33 @@ class ProductsTable
         return $table
             ->columns([
                 ImageColumn::make('thumb')
-                ->label('Image')
-                ->getStateUsing(function ($record) {
-                    // Prefer primary, else first picture
-                    $path = data_get($record, 'primaryPicture.url')
-                        ?? data_get($record, 'pictures.0.url');
+                    ->label('Image')
+                    ->getStateUsing(function ($record) {
+                        $fallback = 'https://placehold.co/112x112?text=No+Image';
+                        $path = data_get($record, 'primaryPicture.url')
+                            ?? data_get($record, 'pictures.0.url');
 
-                    if (! $path) {
-                        return null; // will fall back to defaultImageUrl
-                    }
+                        if (! $path) return $fallback;
 
-                    // If already a full URL (CDN/S3/http), return it as is
-                    if (Str::startsWith($path, ['http://', 'https://'])) {
-                        return $path;
-                    }
+                        if (Str::startsWith($path, ['http://','https://'])) {
+                            $url = $path;
+                        } else {
+                            $relative = ltrim(preg_replace('#^/?storage/#', '', $path), '/');
+                            $url = Storage::disk('public')->exists($relative)
+                                ? Storage::disk('public')->url($relative)
+                                : $fallback;
+                        }
 
-                    // If someone saved "storage/..." in DB, normalize to relative
-                    $path = ltrim(preg_replace('#^storage/#', '', $path), '/');
-
-                    // Convert relative storage path to a public URL
-                    return Storage::disk('public')->url($path);
-                })
-                ->size(56)            // or ->height(56) / ->square()
-                ->extraImgAttributes(['loading' => 'lazy'])
-                ->defaultImageUrl('https://placehold.co/112x112?text=No+Image'),
+                        $ver = optional($record->updated_at)->timestamp ?? time(); // cache-bust
+                        return $url.(str_contains($url,'?') ? '&' : '?').'v='.$ver;
+                    })
+                    ->size(56)
+                    ->defaultImageUrl('https://placehold.co/112x112?text=No+Image')
+                    ->extraImgAttributes(['loading' => 'lazy']),
                     
 
                 TextColumn::make('name')
-                    ->label('Product Name')
+                    ->label('Product Code')
                     ->searchable(),
 
                 TextColumn::make('category.name')

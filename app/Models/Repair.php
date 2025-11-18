@@ -16,11 +16,11 @@ class Repair extends Model
 
     public function customer() 
     { 
-        return $this->belongsTo(\App\Models\User::class, 'customer_id'); 
+         return $this->belongsTo(Customer::class);
     }
     public function images()   
     { 
-        return $this->hasMany(\App\Models\RepairImage::class); 
+         return $this->hasMany(\App\Models\RepairImage::class);
     }
 
 

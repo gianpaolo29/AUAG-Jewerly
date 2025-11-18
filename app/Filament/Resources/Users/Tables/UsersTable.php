@@ -13,7 +13,7 @@ class UsersTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn ($query) => $query->where('role', 'customer')) 
+            ->modifyQueryUsing(fn ($query) => $query->where('role', 'staff')) 
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
@@ -21,13 +21,6 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
-
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-
-                TextColumn::make('role')
-                    ->badge(),
 
                 TextColumn::make('created_at')
                     ->dateTime()

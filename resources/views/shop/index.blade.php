@@ -3,6 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
             {{ __('Shop') }}
         </h2>
+          @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar{display:none}
+    .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  </style>
         <style>[x-cloak]{display:none!important}</style>
 
     </x-slot>
@@ -164,18 +170,6 @@
 
                     </div>
 
-                    {{-- ADD TO CART button --}}
-                    <div class="p-2">
-                        <form action="#" method="POST">
-                        @csrf
-                        <button
-                            type="button"
-                            class="relative flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
-                            Add to Cart
-                            <span class="sr-only">, {{ $product->name }}</span>
-                        </button>
-                        </form>
-                    </div>
                     </div>
                 @empty
                     <div class="col-span-full text-center text-gray-600 dark:text-gray-300">

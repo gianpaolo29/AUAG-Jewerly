@@ -4,8 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
 
+use App\Http\Controllers\HomeController;
+Route::get('/', HomeController::class)->name('home');
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/shop', function () {
+    return view('shop.index');
 });
 
 Route::get('/dashboard', function () {

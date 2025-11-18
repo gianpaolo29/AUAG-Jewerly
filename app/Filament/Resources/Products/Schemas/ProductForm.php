@@ -3,38 +3,35 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\Repeater;   // ← use Repeater instead of Group
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
+// Removed unused Toggle import: use Filament\Forms\Components\Toggle;
 
 class ProductForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
-            // Primary picture via relation (morphOne simulated with maxItems(1))
             Repeater::make('primaryPicture')
-                ->relationship('primaryPicture')   // Product::primaryPicture() relation
+                ->relationship('primaryPicture')
                 ->schema([
-                    FileUpload::make('url')
+                    FileUpload::make('url') 
                         ->image()
                         ->disk('public')
                         ->directory('products')
                         ->visibility('public')
                         ->required()
-                        ->columnSpanFull(),
-
-                    Toggle::make('is_primary')
-                    ->default(true)
-                    ->hidden()
-                    ->dehydrated(true), // ← hidden fields aren’t saved unless dehydrated
+                        ->columnSpanFull(), // Removed the comma here!
+                    
+                    // The Toggle component was removed from here.
 
                 ])
-                ->minItems(1)          // ensure a record exists
-                ->maxItems(1)          // keep it “one-to-one”
+                ->minItems(1) 
+                ->maxItems(1) 
+                ->deletable(false)
                 ->columns(1)
                 ->columnSpanFull(),
 
@@ -49,7 +46,11 @@ class ProductForm
 
             Textarea::make('description')->default(null)->columnSpanFull(),
 
-            TextInput::make('price')->numeric()->required(),
+            TextInput::make('price')
+                ->numeric()
+                ->required()
+                ->minValue(0.01),
+                
             TextInput::make('quantity')->numeric()->minValue(0)->default(0),
         ]);
     }

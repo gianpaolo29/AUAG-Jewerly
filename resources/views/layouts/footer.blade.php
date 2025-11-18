@@ -59,7 +59,7 @@
 
   <div class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-white/70 flex items-center justify-between">
-      <p>© 2025 Luxe Jewelry. All rights reserved.</p>
+      <p>© 2025 AUAG Jewelry. All rights reserved.</p>
       <div class="flex gap-6">
         <a href="#" class="hover:text-white">Privacy Policy</a>
         <a href="#" class="hover:text-white">Terms of Service</a>

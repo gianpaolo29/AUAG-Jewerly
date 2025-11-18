@@ -28,7 +28,7 @@
           Timeless Elegance,<br/> Crafted to Perfection
         </h1>
         <p class="text-white/90 mt-5 text-lg">Discover our exquisite collection of handcrafted jewelry</p>
-        <a href="{{ route('login') }}" class="inline-flex items-center gap-2 mt-10 rounded-2xl border border-white/80 px-8 py-4 text-lg font-medium text-white hover:bg-white hover:text-header transition">
+        <a href="{{ url('/shop') }}" class="inline-flex items-center gap-2 mt-10 rounded-2xl border border-white/80 px-8 py-4 text-lg font-medium text-white hover:bg-white hover:text-header transition">
           Shop Now
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -60,10 +60,10 @@
            class="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth pr-2">
         @php
           $products = [
-            ['Eternal Solitaire Ring', '2,850', 'https://images.unsplash.com/photo-1616514182251-2f7f3c2f1b65?q=80&w=1400&auto=format&fit=crop'],
-            ['Classic Pearl Necklace', '1,650', 'https://images.unsplash.com/photo-1602189629157-bf0ff7fef1b1?q=80&w=1400&auto=format&fit=crop'],
-            ['Diamond Tennis Bracelet', '3,200', 'https://images.unsplash.com/photo-1616514182296-4a3e8b1e3a7d?q=80&w=1400&auto=format&fit=crop'],
-            ['Drop Earrings', '980', 'https://images.unsplash.com/photo-1617038260897-1f1b2e3b41c3?q=80&w=1400&auto=format&fit=crop'],
+            ['Eternal Solitaire Ring', '2,850', asset('Ring.jpg')],
+            ['Classic Pearl Necklace', '1,650', asset('Necklace.jpg')],
+            ['Diamond Tennis Bracelet', '3,200', asset('Bracelet.jpg')],
+            ['Drop Earrings', '980', asset('Earrings.jpg')],
           ];
         @endphp
 
@@ -73,10 +73,6 @@
           <div class="px-6 py-5">
             <h3 class="font-serif text-xl">{{ $p[0] }}</h3>
             <p class="text-black/60 mt-1">${{ $p[1] }}</p>
-            <div class="mt-4 flex gap-3">
-              <a href="#" class="px-4 py-2 rounded-xl border border-black/20 hover:bg-black hover:text-white transition text-sm">Add to Cart</a>
-              <a href="#" class="px-4 py-2 rounded-xl border border-black/20 hover:bg-black hover:text-white transition text-sm">Quick View</a>
-            </div>
           </div>
         </article>
         @endforeach
@@ -112,10 +108,10 @@
     </div>
   </section>
 
-  <!-- Featured -->
+  
   <section class="relative overflow-hidden">
     <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=2000&auto=format&fit=crop"
+      <img src="https://wpcdn.us-east-1.vip.tn-cloud.net/www.hawaiimagazine.com/content/uploads/2022/11/c/h/thumbnail-paradisecollectionaffordablejewelry-1024x683.jpg"
            alt="" class="w-full h-full object-cover brightness-50">
     </div>
     <div class="relative max-w-7xl mx-auto px-4 py-24 lg:py-28">
@@ -128,14 +124,14 @@
           </a>
         </div>
         <div class="bg-black rounded-[28px] p-2 shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1520962918287-7448c2878f65?q=80&w=1200&auto=format&fit=crop"
+          <img src="https://wpcdn.us-east-1.vip.tn-cloud.net/www.hawaiimagazine.com/content/uploads/2022/11/c/h/thumbnail-paradisecollectionaffordablejewelry-1024x683.jpg"
                class="w-full aspect-[4/3] object-cover rounded-[20px]" alt="Featured piece">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  
   <section id="about" class="max-w-5xl mx-auto px-4 py-24">
     <h3 class="font-serif text-5xl text-center">Our Story</h3>
     <p class="mt-8 text-lg text-center text-black/70 leading-8">
@@ -151,7 +147,7 @@
     </div>
   </section>
 
-  <!-- Newsletter -->
+  
   <section class="bg-[#eceff1] py-16">
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h4 class="font-serif text-4xl">Stay Connected</h4>
@@ -165,11 +161,9 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer id="footer" class="bg-black text-white">
     <div class="max-w-7xl mx-auto px-4 py-14 grid gap-10 md:grid-cols-4">
 
-      <!-- col 1: logo + blurb -->
       <div>
         <img src="{{ asset('Auag.jpg') }}" alt="Luxe Jewelry Logo" class="h-10 w-auto mb-4">
         <p class="text-white/70 max-w-sm">
@@ -177,7 +171,7 @@
         </p>
       </div>
 
-      <!-- col 2: Collections -->
+     
       <div>
         <div class="font-serif text-xl mb-3">Collections</div>
         <ul class="space-y-2 text-white/80">
@@ -188,7 +182,7 @@
         </ul>
       </div>
 
-      <!-- col 3: Services -->
+    
       <div>
         <div class="font-serif text-xl mb-3">Services</div>
         <ul class="space-y-2 text-white/80">
@@ -199,7 +193,7 @@
         </ul>
       </div>
 
-      <!-- col 4: Connect -->
+      
       <div>
         <div class="font-serif text-xl mb-3">Connect</div>
         <div class="flex gap-3">

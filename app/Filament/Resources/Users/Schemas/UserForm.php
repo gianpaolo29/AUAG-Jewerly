@@ -27,19 +27,10 @@ class UserForm
             TextInput::make('password')
                 ->password()
                 ->revealable()
-                ->autocomplete('new-password')                // prevent Chrome autofill
-                ->dehydrated(fn ($state) => filled($state))   // only save if provided
-                ->dehydrateStateUsing(fn ($s) => filled($s) ? Hash::make($s) : null)
+                ->autocomplete('new-password')
+                ->rule('min:8')
                 ->required(fn (string $operation) => $operation === 'create')
                 ->hidden(fn (string $operation) => $operation === 'edit'),
-
-            Select::make('role')
-                ->options([
-                    'staff'    => 'Staff',
-                    'customer' => 'Customer',
-                ])
-                ->default('customer')
-                ->required(),
         ]);
     }
 }

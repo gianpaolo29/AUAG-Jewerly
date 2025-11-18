@@ -28,8 +28,26 @@ class Product extends Model
         return $this->pictures()->orderByDesc('is_primary')->orderBy('id');
     }
 
-    public function pictures() { return $this->morphMany(\App\Models\PictureUrl::class, 'imageable'); }
-    public function primaryPicture() { return $this->morphOne(\App\Models\PictureUrl::class, 'imageable')->where('is_primary', true); }
+     
+    public function pictures()
+    {
+        return $this->morphMany(\App\Models\PictureUrl::class, 'imageable')
+            ->orderByDesc('is_primary')->orderBy('id');
+    }
+
+ 
+    public function primaryPicture()
+    {
+        return $this->morphOne(\App\Models\PictureUrl::class, 'imageable')
+            ->where('is_primary', true);
+    }
+
+        public function getMainImageUrlAttribute(): string
+    {
+        
+        $first = $this->pictureUrls->first();
+        return $first?->url ?? asset('placeholder.jpg');
+    }
     
 }
 
